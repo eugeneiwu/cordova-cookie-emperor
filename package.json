@@ -1,26 +1,24 @@
 {
-  "name": "cordova-plugin-cookieemperor",
+  "name": "tensorflow-fidelidade-plugin",
   "version": "1.0.0",
-  "description": "Cordova webkit browser cookie manipulation, XWalk solution",
+  "description": "Tensor Flow Plugin to identify an image using Image Identification",
   "cordova": {
-    "id": "cordova-plugin-cookieemperor",
+    "id": "tensorflow-fidelidade-plugin",
     "platforms": [
       "android",
       "ios"
     ]
   },
   "repository": {
-    "type": "git",
-    "url": "https://github.com/RTK/cordova-cookie-emperor"
   },
   "keywords": [
     "cordova",
-    "cookies",
-    "cookie",
+    "tenslorflow lite",
+    "tensorflow",
     "manipulate",
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "author": "Rouven Kruse",
+  "author": "Paulo Cesar Camilo",
   "license": "MIT"
 }

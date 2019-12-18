@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="cordova-plugin-cookieemperor" version="1.0.0">
-    <name>CookieEmperor</name>
-    <description>Since the original cookie-master is no longer maintained, I forked this project to make it run within the latest SDK (deprecated errors)</description>
+<plugin xmlns="http://www.phonegap.com/ns/plugins/1.0" id="tensorflow-fidelidade-plugin" version="1.0.0">
+    <name>TensorFlowFidelidadePlugin</name>
+    <description>Tensor Flow Plugin to identify an image using Image Identification</description>
     <license>MIT</license>
-
-    <keywords>cordova,phonegap,cookie,cookies,cookie-manager,cookie-plugin,cookie-emperor</keywords>
 
     <engines>
         <engine name="cordova" version=">=3.0.0" />
     </engines> 
  
-    <js-module src="www/cookieEmperor.js" name="cookieEmperor">
-        <clobbers target="cookieEmperor" />
+    <js-module src="www/TensorFlowFidelidadePlugin.js" name="TensorFlowFidelidadePlugin">
+        <clobbers target="cordova.plugins.TensorFlowFidelidadePlugin" />
     </js-module>
     
     <!-- ios -->
     <platform name="ios">
         <config-file target="config.xml" parent="/*">
-            <feature name="CookieEmperor">
-                <param name="ios-package" value="CDVCookieEmperor"/>
+            <feature name="TensorFlowFidelidadePlugin">
+                <param name="ios-package" value="TensorFlowFidelidadePlugin"/>
             </feature>
         </config-file>
         <header-file src="src/ios/CDVCookieEmperor.h" />
@@ -28,16 +26,48 @@
     
     <!-- android -->
     <platform name="android">
+<!-- 
+        <preference name="android-minSdkVersion" value="22"/>
+        <preference name="android-targetSdkVersion" value="28"/>
+-->
         <config-file target="AndroidManifest.xml" parent="/manifest">
             <uses-permission android:name="android.permission.INTERNET" />
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+            <uses-sdk 
+                android:minSdkVersion="22"
+                android:targetSdkVersion="28"/>
+
         </config-file>
+
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="CookieEmperor">
-                <param name="android-package" value="de.rouvenkruse.cordova.plugins.cookieemperor.CookieEmperor"/>
+            <feature name="TensorFlowFidelidadePlugin">
+                <param name="android-package" value="com.tensorflow.fidelidade.plugin.TensorFlowFidelidadePlugin"/>
             </feature>
         </config-file>
+
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application tools:replace="android:icon" />
+        </edit-config>
  
-        <source-file src="src/android/de/rouvenkruse/cordova/plugins/cookieemperor/CookieEmperor.java" target-dir="src/de/rouvenkruse/cordova/plugins/cookieemperor" />
+        <source-file src="src/android/TensorFlowFidelidadePlugin.java" 
+            target-dir="src/com/tensorflow/fidelidade/plugin" />
+		<framework src="src/android/lib/tensorflow.gradle" custom="true" type="gradleReference" />  
+
+        <!-- Copy lib files to Cordova Project -->
+        <!-- Model Enq -->
+        <source-file src="src/android/enq_model.tfbundle/model.json" target-dir="app/src/main/assets/enq_model.tfbundle"/>
+        <source-file src="src/android/enq_model.tfbundle/enq_model.tflite" target-dir="app/src/main/assets/enq_model.tfbundle"/>
+        <source-file src="src/android/enq_model.tfbundle/assets/labels.txt" target-dir="app/src/main/assets/enq_model.tfbundle/assets"/>
+            
+         <!-- Model Quality   tools:replace="android:icon" -->
+        <source-file src="src/android/quality_model.tfbundle/model.json" target-dir="app/src/main/assets/quality_model.tfbundle"/>
+        <source-file src="src/android/quality_model.tfbundle/quality_model.tflite" target-dir="app/src/main/assets/quality_model.tfbundle"/>
+        <source-file src="src/android/quality_model.tfbundle/assets/labels.txt" target-dir="app/src/main/assets/quality_model.tfbundle/assets"/>
+        
+         <!-- Hook to add tools:replace="android:icon" in AndroidManifest.xml 
+        <hook type="after_platform_add" src="scripts/androidBeforeInstall.js" /> -->
+
     </platform>          
 </plugin>
