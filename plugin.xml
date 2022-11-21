@@ -46,11 +46,11 @@
                 <param name="android-package" value="com.tensorflow.fidelidade.plugin.TensorFlowFidelidadePlugin"/>
             </feature>
         </config-file>
-
+<!--
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
             <application tools:replace="android:icon" />
         </edit-config>
- 
+ -->
         <source-file src="src/android/TensorFlowFidelidadePlugin.java" 
             target-dir="src/com/tensorflow/fidelidade/plugin" />
 		<framework src="src/android/lib/tensorflow.gradle" custom="true" type="gradleReference" />  
